@@ -5,11 +5,11 @@
 void incluir_dados(Cadastro *dados)
 {
     const char *nome_arquivo = NULL;
-    if (dados->menu_principal == 1)
+    if (dados->menu_principal == '1')
     {
         nome_arquivo = "usuarios_cadastrados.bin";
     }
-    else if (dados->menu_principal == 2)
+    else if (dados->menu_principal == '2')
     {
         nome_arquivo = "adms_cadastrados.bin";
     }

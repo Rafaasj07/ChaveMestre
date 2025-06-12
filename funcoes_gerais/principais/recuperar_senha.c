@@ -7,8 +7,9 @@
 void recuperar_senha(Cadastro *dados) // Lembre-se, dados é o ponteiro para a instancia la na main.
 {
     char tentativa_resposta[100], tentativa_nome[50];
-    int continuar_tent, nome_existe;
+    int nome_existe;
 
+    limpar();
     bordas();
     ir_para(25, 2);
     printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", 218, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 191);
@@ -26,23 +27,38 @@ void recuperar_senha(Cadastro *dados) // Lembre-se, dados é o ponteiro para a i
     nome_existe = verificar_nome(dados, tentativa_nome);
     while (nome_existe == 0)
     {
-        int deseja_sair;
-        printf("\033[1;31mUsuario nao existe![1] Tente outro [2] Sair\033[0m \n");
-        scanf("%d", &deseja_sair);
+        char deseja_sair;
+        ir_para(25, 9);                                         
+        printf("                                             "); // Apaga o nome. Vai empurrando até sair do terminal
+        ir_para(27, 8);
+        printf("\033[1;31m      Usuario nao existe!       \033[0m");
+        ir_para(20, 10);
+        printf("         Deseja tentar outro usuario?         ");
+        ir_para(31, 11);
+        printf("   [1] SIM  [2] SAIR : ");
+        scanf("%c", &deseja_sair);
         apaga_buffer();
         switch (deseja_sair)
         {
-        case 1:
+        case '1':
+            ir_para(27, 8);
+            printf("                                             "); 
+            ir_para(20, 10);
+            printf("                                             "); 
+            ir_para(31, 11);
+            printf("                                             "); 
             ir_para(25, 9);
             printf("Nome: ");
             fgets(tentativa_nome, 50, stdin);
             tentativa_nome[strcspn(tentativa_nome, "\n")] = '\0';
             nome_existe = verificar_nome(dados, tentativa_nome);
             break;
-        case 2:
+        case '2':
+            ir_para(17, 13);
+            printf("\033[1;31mTentativa de recuperacao de senha, mal sucessida.\033[0m");
             exit(0);
+            break;
         default:
-            limpar();
             break;
         }
     }
@@ -50,36 +66,31 @@ void recuperar_senha(Cadastro *dados) // Lembre-se, dados é o ponteiro para a i
     {
         if (nome_existe == 1)
         {
-            ir_para(22, 10);
+            ir_para(25, 10);
             printf("Pergunta: %s", dados->pergunta);
-            ir_para(30, 11);
-            printf("\33[2K\r");
             bordas();
-            ir_para(30, 11);
+            ir_para(25, 11);
             printf("Resposta: ");
             fgets(tentativa_resposta, 100, stdin);
             tentativa_resposta[strcspn(tentativa_resposta, "\n")] = '\0';
             if (strcmp(tentativa_resposta, dados->resposta) == 0)
             {
-                limpar();
                 alterar_senha(dados);
             }
             else
             {
+                char continuar_tent;
                 do
                 {
                     ir_para(21, 13);
                     printf("Resposta Incorreta, quer continuar tentando?");
-                    ir_para(36, 14);
-                    printf("[1] SIM  [2] SAIR");
-                    ir_para(40, 15);
-                    printf("R: ");
-
-                    scanf("%d", &continuar_tent);
+                    ir_para(34, 14);
+                    printf("[1] SIM  [2] SAIR : ");
+                    scanf("%c", &continuar_tent);
                     apaga_buffer();
                     switch (continuar_tent)
                     {
-                    case 1:
+                    case '1':
                         ir_para(21, 13);
                         printf("\33[2K\r");
                         ir_para(36, 14);
@@ -88,19 +99,14 @@ void recuperar_senha(Cadastro *dados) // Lembre-se, dados é o ponteiro para a i
                         printf("\33[2K\r");
                         bordas();
                         break;
-                    case 2:
+                    case '2':
+                        ir_para(17, 16);
+                        printf("\033[1;31mTentativa de recuperacao de senha, mal sucessida.\033[0m");
                         exit(0);
                     default:
-                        ir_para(21, 13);
-                        printf("\33[2K\r");
-                        ir_para(36, 14);
-                        printf("\33[2K\r");
-                        ir_para(40, 15);
-                        printf("\33[2K\r");
-                        bordas();
                         break;
                     }
-                } while (continuar_tent != 1 && continuar_tent != 2);
+                } while (continuar_tent != '1' && continuar_tent != '2');
             }
         }
     } while (strcmp(tentativa_resposta, dados->resposta) != 0);

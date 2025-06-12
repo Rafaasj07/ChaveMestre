@@ -9,11 +9,11 @@ int verificar_nome(Cadastro *dados, char tentativa_nome[])
     Cadastro ler_dados; // Instância temporária para ler os dados do arquivo. Do tipo Cadastro.
 
     const char *nome_arquivo = NULL;
-    if (dados->menu_principal == 1)
+    if (dados->menu_principal == '1')
     {
         nome_arquivo = "usuarios_cadastrados.bin";
     }
-    else if (dados->menu_principal == 2)
+    else if (dados->menu_principal == '2')
     {
         nome_arquivo = "adms_cadastrados.bin";
     }

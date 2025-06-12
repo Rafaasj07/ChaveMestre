@@ -6,7 +6,7 @@ typedef struct
     char pergunta[100]; // embora a definição da struct esteja acessível em várias funções (pois você a declarou no .h), você só cria uma instância
     char resposta[100]; // dessa struct na main(), o que significa que os dados ficam armazenados na variável que você criar na main().
     char senha[50];
-    int menu_principal; // 1 usuario, 2 adm
+    char menu_principal; // 1 usuario, 2 adm
 } Cadastro;
 
 // Prototipos das funcoes principais
@@ -15,8 +15,10 @@ void login(Cadastro *dados);
 void recuperar_senha(Cadastro *dados);
 
 // Prototipos das funcoes do adm
-char *listagem_usuario(Cadastro *dados);
-char *localiza_usuario(Cadastro *dados, char localiza_usuario[50]);
+void adm_funcoes(Cadastro *dados);
+void listagem_usuario(Cadastro *dados);
+void localiza_usuario(Cadastro *dados);
+void excluir_usuario(Cadastro *dados);
 
 // Prototipos das funcoes do front
 void ir_para(int x, int y);
@@ -27,7 +29,7 @@ void limpar(void);
 void apaga_buffer(void);
 
 // Prototipos das funcoes binarias
-void inicializar_arquivo(int menu_principal);
+void inicializar_arquivo(char menu_principal);
 void incluir_dados(Cadastro *dados);
 int verificar_nome(Cadastro *dados, char tentativa_nome[]);
 int alterar_senha(Cadastro *dados);

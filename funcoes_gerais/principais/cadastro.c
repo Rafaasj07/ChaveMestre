@@ -26,7 +26,6 @@ void cadastro(Cadastro *dados)
     nome_existe = verificar_nome(dados, tentativa_nome);
     while (nome_existe == 1) // Enquanto o nome que eu digitar, for igual algum nome salvo. Vai repetir.
     {
-        limpar();
         ir_para(25, 8);
         printf("\033[1;31mNome ja cadastrado! Tente outro:\033[0m");
 

@@ -11,8 +11,6 @@ void login(Cadastro *dados)
     int nome_existe;
     do // Repete ate o nome do cadastro ser igual ao nome do login
     {
-        int deseja_repetir_nome, senha_existe;
-
         limpar();
         bordas();
         ir_para(25, 2);
@@ -39,7 +37,6 @@ void login(Cadastro *dados)
 
             do // Repeticao ate a senha ser correta
             {
-                int deseja_recuperar;
                 ir_para(6, 11);
                 printf("\33[2K\r"); // Apagar a resposta anterior (apaga a linha)
                 bordas();           // Restaurar a borda apagada
@@ -50,6 +47,8 @@ void login(Cadastro *dados)
 
                 if (strcmp(dados->senha, tentaiva_senha) == 0)
                 {
+                    ir_para(25, 15);
+                    printf("                                               ");
                     ir_para(29, 15);
                     printf("\033[1;32mAcesso ao programa liberado!\033[0m");
                     break;
@@ -60,40 +59,41 @@ void login(Cadastro *dados)
                     printf("\033[1;31mSenha Incorreta! Tente novamente.\033[0m");
                     aux_tentativa_senha++;
 
-                    // A cada 5 tentativas, pergunta ao usuario se quer recuperar senha
+                    // A cada 5 tentativas erradas, pergunta ao usuario se quer recuperar senha
                     if (aux_tentativa_senha % 3 == 0)
                     {
+                        char deseja_recuperar;
                         do
                         {
                             ir_para(25, 15);
                             printf("     Deseja recuperar a senha?     ");
                             ir_para(22, 16);
-                            printf("[1] SIM [2] CONTINUAR TENTANDO [3] SAIR");
-                            ir_para(38, 17);
-                            printf("R: ");
-                            scanf("%d", &deseja_recuperar);
+                            printf("[1] SIM [2] CONTINUAR TENTANDO [3] SAIR : ");
+                            scanf("%c", &deseja_recuperar);
                             apaga_buffer();
                             switch (deseja_recuperar)
                             {
-                            case 1:
+                            case '1':
                                 limpar();
                                 recuperar_senha(dados);
                                 exit(0);
-                            case 2:
+                            case '2':
+                                ir_para(25, 15);
+                                printf("\33[2K\r");
                                 ir_para(22, 16);
                                 printf("\33[2K\r");
                                 ir_para(38, 17);
                                 printf("\33[2K\r");
                                 bordas();
                                 break; // Fecha o laço
-                            case 3:
-                                printf("Tentativa de login mal sucedida.\n");
+                            case '3':
+                                ir_para(29, 19);
+                                printf("\033[1;31mTentativa de login mal sucedida.\033[0m");
                                 exit(0);
                             default:
-                                limpar();
-                                continue; // Pula pro proximo laço
+                                break; 
                             }
-                        } while (deseja_recuperar != 1 && deseja_recuperar != 2 && deseja_recuperar != 3);
+                        } while (deseja_recuperar != '1' && deseja_recuperar != '2' && deseja_recuperar != '3');
                     }
                 }
 
@@ -102,30 +102,33 @@ void login(Cadastro *dados)
 
         else
         {
-
             // Se o usuario cadastrado for diferente do login, oferece opcao de tentar de novo ou sair
-            ir_para(35, 12);
-            printf("\033[1;31mUsuario nao existe\033[0m");
-            ir_para(26, 13);
-            printf("Deseja repetir o nome do Usuario?");
-            ir_para(30, 14);
-            printf("[1] SIM  ou  [2] NAO  : ");
-            scanf("%d", &deseja_repetir_nome);
-            apaga_buffer();
-            switch (deseja_repetir_nome)
+            char deseja_repetir_nome;
+            do
             {
-            case 1:
-                limpar();
-                continue;
-            case 2:
-                ir_para(24, 15);
-                printf("\033[1;31mTentativa de Login mal sucedida.\033[0m");
-                exit(0);
-            default:
-                ir_para(36, 15);
-                printf("\033[1;31mComando Invalido.\033[0m");
-                break;
-            }
+                ir_para(35, 12);
+                printf("\033[1;31mUsuario nao existe\033[0m");
+                ir_para(26, 14);
+                printf("Deseja repetir o nome do usuario?");
+                ir_para(30, 15);
+                printf("[1] SIM  ou  [2] NAO  : ");
+                scanf("%c", &deseja_repetir_nome);
+                apaga_buffer();
+                switch (deseja_repetir_nome)
+                {
+                case '1':
+                    limpar();
+                    continue;
+                case '2':
+                    ir_para(29, 19);
+                    printf("\033[1;31mTentativa de Login mal sucedida.\033[0m");
+                    exit(0);
+                default:
+                    ir_para(36, 17);
+                    printf("\033[1;31mDigito Invalido.\033[0m");
+                    break;
+                }
+            } while (deseja_repetir_nome != '1' && deseja_repetir_nome != '2');
         }
     } while (nome_existe == 0);
 }
