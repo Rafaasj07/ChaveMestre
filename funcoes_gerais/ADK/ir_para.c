@@ -4,7 +4,7 @@
 #include "prototipos.h"
 
 // Função para posicionar o cursor na tela do terminal em coordenadas (x, y)
-void ir_para (int x, int y)
+void ir_para(int x, int y)
 {
     // Imprime uma sequência de controle ANSI para mover o cursor
     // 0x1B é o código ASCII para ESC (escape), que indica o início de uma sequência ANSI

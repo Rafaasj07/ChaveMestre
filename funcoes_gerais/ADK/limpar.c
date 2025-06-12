@@ -2,7 +2,8 @@
 #include "prototipos.h"
 
 // Função para limpar a tela do console.
-void limpar(void) {
+void limpar(void)
+{
 // A diretiva de pré-processador '#ifdef' verifica se uma macro está definida.
 // _WIN32 é uma macro padrão em compiladores para Windows.
 #ifdef _WIN32

@@ -2,31 +2,31 @@
 #include <string.h>
 #include <conio.h>
 #include <stdlib.h>
-#include "prototipos.h" 
+#include "prototipos.h"
 
 // A função main é o ponto de entrada de qualquer programa em C.
 int main()
 {
     // Declara uma string para armazenar o nome do sistema operacional.
     char SO[10];
-// Diretiva de pré-processador para verificar se o código está sendo compilado no Windows.
-        #ifdef _WIN32
-            {
-                // Se for Windows, define a variável SO como "Windows".
-                strcpy(SO, "Windows");
-            }
-        #else
-            {
-                // Caso contrário (Linux, etc.), define como "Linux".
-                strcpy(SO, "Linux");
-            }
-        #endif
+    // Diretiva de pré-processador para verificar se o código está sendo compilado no Windows.
+#ifdef _WIN32
+    {
+        // Se for Windows, define a variável SO como "Windows".
+        strcpy(SO, "Windows");
+    }
+#else
+    {
+        // Caso contrário (Linux, etc.), define como "Linux".
+        strcpy(SO, "Linux");
+    }
+#endif
 
     // Formata o console do Windows para 80 colunas e 25 linhas.
     // Isso garante que a interface gráfica do terminal (bordas, etc.) seja exibida corretamente.
     system("mode con:cols=80 lines=25");
 
-    // Cria uma instância da struct 'Cadastro'. 
+    // Cria uma instância da struct 'Cadastro'.
     // Esta variável armazenará os dados do usuário/adm durante a execução.
     Cadastro dados;
     // Buffer para armazenar a mensagem que será enviada por e-mail.
@@ -37,25 +37,33 @@ int main()
     do
     {
         // Funções para desenhar a interface gráfica no terminal.
-        bordas(); // Desenha as bordas da tela.
+        bordas();       // Desenha as bordas da tela.
         ir_para(25, 2); // Move o cursor para a posição (coluna, linha).
         // Imprime o título do menu.
-        printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", 218, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 191);
+        printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c",
+               218, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+               196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+               196, 196, 196, 196, 191);
         ir_para(25, 3);
         printf("%c   \033[1;35mSISTEMA DE CADASTRO E LOGIN\033[0m   %c", 179, 179);
         ir_para(25, 4);
         printf("%c          Menu Principal         %c", 179, 179);
         ir_para(25, 5);
-        printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", 192, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 217);
+        printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c",
+               192, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+               196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+               196, 196, 196, 196, 217);
 
         // Exibe as opções do menu.
         ir_para(23, 9);
         escreva("            1.", PINK); // Escreve o texto com a cor rosa.
         printf(" MENU USUARIO            ");
         ir_para(23, 10);
-        escreva("         2.", PINK); printf(" MENU ADMINISTRADOR         ");
+        escreva("         2.", PINK);
+        printf(" MENU ADMINISTRADOR         ");
         ir_para(23, 11);
-        escreva("                3.", PINK); printf(" SAIR                ");
+        escreva("                3.", PINK);
+        printf(" SAIR                ");
 
         // Solicita a entrada do usuário.
         ir_para(26, 13);
@@ -70,32 +78,42 @@ int main()
         {
             // Variável local para o submenu do usuário.
             char menu_usuario;
-        case '1':              // Caso o usuário escolha "MENU USUARIO".
+        case '1': // Caso o usuário escolha "MENU USUARIO".
             // Loop do Menu do Usuário.
             do
             {
                 // Desenha a interface do menu do usuário.
                 bordas();
                 ir_para(25, 2);
-                printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", 218, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 191);
+                printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c",
+                       218, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+                       196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+                       196, 196, 196, 196, 191);
                 ir_para(25, 3);
                 printf("%c   \033[1;35mSISTEMA DE CADASTRO E LOGIN\033[0m   %c", 179, 179);
                 ir_para(25, 4);
                 printf("%c           Menu Usuario          %c", 179, 179);
                 ir_para(25, 5);
-                printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", 192, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 217);
+                printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c",
+                       192, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+                       196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+                       196, 196, 196, 196, 217);
 
                 // Exibe as opções do submenu.
                 ir_para(21, 9);
-                escreva("       1.", PINK); printf(" CADASTRO            ");
+                escreva("       1.", PINK);
+                printf(" CADASTRO            ");
                 ir_para(21, 10);
                 limpar_linha();
                 ir_para(21, 10);
-                escreva("       2.", PINK); printf(" FAZER LOGIN          ");
+                escreva("       2.", PINK);
+                printf(" FAZER LOGIN          ");
                 ir_para(21, 11);
-                escreva("       3.", PINK); printf(" RECUPERACAO DE SENHA     ");
+                escreva("       3.", PINK);
+                printf(" RECUPERACAO DE SENHA     ");
                 ir_para(21, 12);
-                escreva("       4.", PINK); printf(" SAIR    ");
+                escreva("       4.", PINK);
+                printf(" SAIR    ");
 
                 // Solicita a entrada do usuário.
                 ir_para(26, 13);
@@ -135,8 +153,10 @@ int main()
                         ir_para(30, 21);
                         printf("                                ");
                         ir_para(30, 21);
-                        escreva("[1] ", GREEN); printf("SIM ou ");
-                        escreva("[2] ", RED); printf("NAO : ");
+                        escreva("[1] ", GREEN);
+                        printf("SIM ou ");
+                        escreva("[2] ", RED);
+                        printf("NAO : ");
                         scanf("%c", &quer_login);
                         apaga_buffer();
                         switch (quer_login)
@@ -151,8 +171,8 @@ int main()
                             ir_para(32, 18);
                             escreva("Saindo do programa...", BLUE);
                             break;
-                        default: // Se a opção for inválida.
-                        reset(21); // Limpa a tela a partir da linha 21.
+                        default:       // Se a opção for inválida.
+                            reset(21); // Limpa a tela a partir da linha 21.
                             ir_para(34, 18);
                             limpar_linha();
                             ir_para(33, 18);
@@ -182,8 +202,8 @@ int main()
                     exit(0); // Encerra o programa.
                     break;
 
-                default: // Opção inválida.
-                reset(14); // Limpa a tela a partir da linha 14.
+                default:       // Opção inválida.
+                    reset(14); // Limpa a tela a partir da linha 14.
                     ir_para(34, 16);
                     escreva("DIGITO INVALIDO!", RED);
                     break;
@@ -193,30 +213,40 @@ int main()
 
             // Variável local para o submenu do administrador.
             char menu_adm;
-        case '2':          // Caso o usuário escolha "MENU ADMINISTRADOR".
+        case '2': // Caso o usuário escolha "MENU ADMINISTRADOR".
             // Loop do Menu do Administrador.
             do
             {
                 // Desenha a interface do menu do administrador.
                 bordas();
                 ir_para(25, 2);
-                printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", 218, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 191);
+                printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c",
+                       218, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+                       196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+                       196, 196, 196, 196, 191);
                 ir_para(25, 3);
                 printf("%c   \033[1;35mSISTEMA DE CADASTRO E LOGIN\033[0m   %c", 179, 179);
                 ir_para(25, 4);
                 printf("%c        Menu Administrador       %c", 179, 179);
                 ir_para(25, 5);
-                printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", 192, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 217);
+                printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c",
+                       192, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+                       196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+                       196, 196, 196, 196, 217);
 
                 // Exibe as opções do submenu.
                 ir_para(21, 9);
-                escreva("           1.", PINK); printf(" CADASTRAR ADMINISTRADOR           ");
+                escreva("           1.", PINK);
+                printf(" CADASTRAR ADMINISTRADOR           ");
                 ir_para(21, 10);
-                escreva("           2.", PINK); printf(" LOGIN ADMINISTRADOR            ");
+                escreva("           2.", PINK);
+                printf(" LOGIN ADMINISTRADOR            ");
                 ir_para(21, 11);
-                escreva("           3.", PINK); printf(" RECUPERACAO DE SENHA          ");
+                escreva("           3.", PINK);
+                printf(" RECUPERACAO DE SENHA          ");
                 ir_para(21, 12);
-                escreva("           4.", PINK); printf(" SAIR         ");
+                escreva("           4.", PINK);
+                printf(" SAIR         ");
 
                 // Solicita a entrada do usuário.
                 ir_para(26, 13);
@@ -253,8 +283,10 @@ int main()
                         ir_para(30, 21);
                         printf("                                ");
                         ir_para(30, 21);
-                        escreva("[1]", GREEN); printf(" SIM ou");
-                        escreva("[2]", RED); printf(" NAO : ");
+                        escreva("[1]", GREEN);
+                        printf(" SIM ou");
+                        escreva("[2]", RED);
+                        printf(" NAO : ");
                         scanf("%c", &quer_login);
                         apaga_buffer();
                         switch (quer_login)
@@ -324,12 +356,12 @@ int main()
             break;
 
         default: // Opção inválida no menu principal.
-        reset(14);
+            reset(14);
             ir_para(34, 16);
             escreva("DIGITO INVALIDO!", RED);
             break;
         }
-    // O loop principal continua até que o usuário escolha uma opção que direcione para um submenu ('1' ou '2') ou saia ('3').
+        // O loop principal continua até que o usuário escolha uma opção que direcione para um submenu ('1' ou '2') ou saia ('3').
     } while (dados.menu_principal != '1' && dados.menu_principal != '2' && dados.menu_principal != '3');
 
     // Retorno padrão da função main, indica que o programa terminou com sucesso.

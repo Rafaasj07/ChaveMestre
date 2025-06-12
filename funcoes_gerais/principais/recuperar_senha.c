@@ -6,7 +6,8 @@
 
 // Função para recuperar a senha do usuário.
 // Recebe um ponteiro para 'dados' para carregar os dados do usuário e alterar a senha.
-void recuperar_senha(Cadastro *dados) {
+void recuperar_senha(Cadastro *dados)
+{
     char tentativa_resposta[52] = "", tentativa_nome[37];
     int nome_existe;
 
@@ -14,13 +15,19 @@ void recuperar_senha(Cadastro *dados) {
     limpar();
     bordas();
     ir_para(25, 2);
-    printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", 218, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 191);
+    printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c",
+           218, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+           196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+           196, 196, 196, 196, 191);
     ir_para(25, 3);
     printf("%c   \033[1;35mSISTEMA DE CADASTRO E LOGIN\033[0m   %c", 179, 179);
     ir_para(25, 4);
     printf("%c       Recuperacao de Senha      %c", 179, 179);
     ir_para(25, 5);
-    printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", 192, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 217);
+    printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c",
+           192, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+           196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196,
+           196, 196, 196, 196, 217);
 
     // Pede o nome de usuário para iniciar a recuperação.
     ir_para(25, 9);
@@ -30,7 +37,8 @@ void recuperar_senha(Cadastro *dados) {
     nome_existe = verificar_nome(dados, tentativa_nome); // Verifica se o usuário existe.
 
     // Loop caso o nome não seja encontrado.
-    while (nome_existe == 0) {
+    while (nome_existe == 0)
+    {
         char deseja_sair;
         ir_para(25, 9);
         limpar_linha();
@@ -40,11 +48,14 @@ void recuperar_senha(Cadastro *dados) {
         ir_para(20, 10);
         escreva("         Deseja tentar outro usuario?         ", BLUE);
         ir_para(31, 11);
-        escreva("   [1] ", GREEN); printf("SIM ");
-        escreva(" [2] ", RED); printf("SAIR : ");
+        escreva("   [1] ", GREEN);
+        printf("SIM ");
+        escreva(" [2] ", RED);
+        printf("SAIR : ");
         scanf("%c", &deseja_sair);
         apaga_buffer();
-        switch (deseja_sair) {
+        switch (deseja_sair)
+        {
         case '1':
             // Limpa os campos para uma nova tentativa.
             ir_para(27, 8);
@@ -70,8 +81,10 @@ void recuperar_senha(Cadastro *dados) {
     }
 
     // Loop para verificar a resposta da pergunta secreta.
-    do {
-        if (nome_existe == 1) { // Garante que o usuário foi encontrado.
+    do
+    {
+        if (nome_existe == 1)
+        { // Garante que o usuário foi encontrado.
             ir_para(25, 10);
             escreva("Pergunta: ", PINK);
             printf("%s", dados->pergunta); // Exibe a pergunta de segurança do usuário.
@@ -86,23 +99,30 @@ void recuperar_senha(Cadastro *dados) {
             cifra_cesar(tentativa_resposta, 23);
 
             // Compara a resposta digitada com a resposta armazenada.
-            if (strcmp(tentativa_resposta, dados->resposta) == 0) {
+            if (strcmp(tentativa_resposta, dados->resposta) == 0)
+            {
                 // Se a resposta estiver correta, permite a alteração da senha.
                 alterar_senha(dados);
                 return;
-            } else {
+            }
+            else
+            {
                 // Se a resposta estiver incorreta.
                 char continuar_tent;
-                do {
+                do
+                {
                     reset(11);
                     ir_para(21, 13);
                     escreva("Resposta Incorreta, quer continuar tentando?", RED);
                     ir_para(34, 14);
-                    escreva("[1] ", GREEN); printf("SIM ");
-                    escreva(" [2] ", RED); printf("SAIR : ");
+                    escreva("[1] ", GREEN);
+                    printf("SIM ");
+                    escreva(" [2] ", RED);
+                    printf("SAIR : ");
                     scanf("%c", &continuar_tent);
                     apaga_buffer();
-                    switch (continuar_tent) {
+                    switch (continuar_tent)
+                    {
                     case '1':
                         // Limpa as mensagens de erro para tentar novamente.
                         ir_para(21, 13);

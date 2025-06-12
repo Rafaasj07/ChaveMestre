@@ -12,10 +12,10 @@ void bordas()
 
     for (int x = 3; x < 79; x++)
     {
-        ir_para(x, 2);  // Posiciona o cursor na linha 2 (superior), coluna x
+        ir_para(x, 2);     // Posiciona o cursor na linha 2 (superior), coluna x
         printf("%c", 196); // Imprime o traço horizontal na linha superior
 
-        ir_para(x, 24); // Posiciona o cursor na linha 24 (inferior), coluna x
+        ir_para(x, 24);    // Posiciona o cursor na linha 24 (inferior), coluna x
         printf("%c", 196); // Imprime o traço horizontal na linha inferior
     }
 
@@ -26,10 +26,10 @@ void bordas()
 
     for (int y = 3; y < 24; y++)
     {
-        ir_para(2, y);   // Posiciona o cursor na coluna 2 (esquerda), linha y
+        ir_para(2, y);     // Posiciona o cursor na coluna 2 (esquerda), linha y
         printf("%c", 179); // Imprime a barra vertical esquerda
 
-        ir_para(79, y);  // Posiciona o cursor na coluna 79 (direita), linha y
+        ir_para(79, y);    // Posiciona o cursor na coluna 79 (direita), linha y
         printf("%c", 179); // Imprime a barra vertical direita
     }
 

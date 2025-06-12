@@ -15,11 +15,12 @@ typedef struct
 } Cadastro;
 
 // Enumeração para as cores usadas na interface, associando letras para representar cores
-typedef enum {
-    RED = 'r',    // Vermelho
-    GREEN = 'g',  // Verde
-    BLUE = 'a',   // Azul
-    PINK = 'p'    // Rosa
+typedef enum
+{
+    RED = 'r',   // Vermelho
+    GREEN = 'g', // Verde
+    BLUE = 'a',  // Azul
+    PINK = 'p'   // Rosa
 } Color;
 
 // --- Protótipos das Funções Principais ---
@@ -27,8 +28,8 @@ typedef enum {
 // facilitando a organização do código.
 
 // Funções para cadastro, login e recuperação de senha, operando diretamente na struct Cadastro
-void cadastro(Cadastro *dados);         // Registra um novo usuário ou administrador
-void login(Cadastro *dados);            // Realiza autenticação de usuário ou administrador
+void cadastro(Cadastro *dados);        // Registra um novo usuário ou administrador
+void login(Cadastro *dados);           // Realiza autenticação de usuário ou administrador
 void recuperar_senha(Cadastro *dados); // Permite recuperação de senha via pergunta de segurança
 
 // --- Protótipos das Funções do Administrador ---
@@ -40,24 +41,23 @@ void excluir_usuario(Cadastro *dados);  // Remove um usuário do sistema
 
 // --- Protótipos das Funções de Interface (ADK - ANSIstyle Dev Kit) ---
 // Funções auxiliares para controle e desenho da interface no terminal
-void limpar(void);            // Limpa toda a tela do terminal
-void ir_para(int x, int y);   // Move o cursor para a posição (coluna x, linha y)
-void bordas(void);            // Desenha bordas na interface do terminal
-void limpar_linha(void);      // Limpa uma linha específica da tela
-void escreva(char *s, Color color);  // Imprime texto colorido no terminal
-void reset(int n);            // Limpa da linha n para baixo e redesenha bordas
+void limpar(void);                  // Limpa toda a tela do terminal
+void ir_para(int x, int y);         // Move o cursor para a posição (coluna x, linha y)
+void bordas(void);                  // Desenha bordas na interface do terminal
+void limpar_linha(void);            // Limpa uma linha específica da tela
+void escreva(char *s, Color color); // Imprime texto colorido no terminal
+void reset(int n);                  // Limpa da linha n para baixo e redesenha bordas
 
 // --- Protótipos das Funções Secundárias (Utilitárias) ---
 // Funções utilitárias para auxiliar em tarefas específicas
-void apaga_buffer(void);                            // Limpa o buffer de entrada para evitar erros na leitura
+void apaga_buffer(void);                                  // Limpa o buffer de entrada para evitar erros na leitura
 void envia_email(Cadastro *dados, char mensagem_email[]); // Envia um email com a mensagem especificada
-void cifra_cesar(char *codificada, int deslocamento);    // Aplica ou decifra a cifra de César na string passada
-void get_secret(char *s, int tam);                  // Lê entrada secreta do usuário (ex: senha) escondendo os caracteres
+void cifra_cesar(char *codificada, int deslocamento);     // Aplica ou decifra a cifra de César na string passada
+void get_secret(char *s, int tam);                        // Lê entrada secreta do usuário (ex: senha) escondendo os caracteres
 
 // --- Protótipos das Funções de Manipulação de Arquivos Binários ---
 // Funções para gerenciar o armazenamento persistente dos dados em arquivos binários
-void inicializar_arquivo(char menu_principal);      // Cria o arquivo binário se não existir (usuário ou adm)
-void incluir_dados(Cadastro *dados);                 // Grava um novo cadastro no arquivo binário
+void inicializar_arquivo(char menu_principal);              // Cria o arquivo binário se não existir (usuário ou adm)
+void incluir_dados(Cadastro *dados);                        // Grava um novo cadastro no arquivo binário
 int verificar_nome(Cadastro *dados, char tentativa_nome[]); // Verifica se um nome já está cadastrado
-int alterar_senha(Cadastro *dados);                 // Altera a senha de um usuário existente no arquivo
-
+int alterar_senha(Cadastro *dados);                         // Altera a senha de um usuário existente no arquivo

@@ -1,7 +1,7 @@
-#include <stdio.h>  
-#include <string.h>     
-#include "C:/msys64/mingw64/include/curl/curl.h"  // Biblioteca libcurl para transferências via URL, usada aqui para SMTP
-#include "prototipos.h" 
+#include <stdio.h>
+#include <string.h>
+#include "C:/msys64/mingw64/include/curl/curl.h" // Biblioteca libcurl para transferências via URL, usada aqui para SMTP
+#include "prototipos.h"
 
 // Struct para manter os dados do e-mail em memória durante o envio
 struct upload_data
@@ -15,7 +15,7 @@ struct upload_data
 size_t read_callback(void *ptr, size_t size, size_t nmemb, void *userdata)
 {
     struct upload_data *data = (struct upload_data *)userdata; // Cast do ponteiro void para struct correta
-    size_t max = size * nmemb; // Número máximo de bytes que podem ser copiados neste ciclo
+    size_t max = size * nmemb;                                 // Número máximo de bytes que podem ser copiados neste ciclo
 
     if (data->sizeleft == 0)
         return 0; // Se não há mais dados a enviar, retorna zero para indicar fim da transferência
@@ -37,7 +37,7 @@ size_t read_callback(void *ptr, size_t size, size_t nmemb, void *userdata)
 void envia_email(Cadastro *dados, char mensagem_email[])
 {
     const char *remetente = "chavemestre.tech@gmail.com"; // Email do remetente (conta de envio)
-    const char *codigo = "cqxb tmuh zwgu zsxm";         // Codigo do remetente para autenticação SMTP
+    const char *codigo = "cqxb tmuh zwgu zsxm";           // Codigo do remetente para autenticação SMTP
 
     // Verificação simples: se a senha não estiver definida, exibe erro e sai da função
     if (!codigo)
@@ -47,18 +47,18 @@ void envia_email(Cadastro *dados, char mensagem_email[])
         return;
     }
 
-    CURL *curl;                  // Ponteiro para estrutura CURL, que controla a operação
-    CURLcode res;                // Variável para armazenar código de retorno das operações CURL
+    CURL *curl;                           // Ponteiro para estrutura CURL, que controla a operação
+    CURLcode res;                         // Variável para armazenar código de retorno das operações CURL
     struct curl_slist *recipients = NULL; // Lista encadeada para armazenar destinatários do email
-    char mensagem[1024];         // Buffer para montar o corpo do email
+    char mensagem[1024];                  // Buffer para montar o corpo do email
 
     // Monta a mensagem do email no formato SMTP padrão
     snprintf(mensagem, sizeof(mensagem),
-             "To: %s\r\n"                  // Destinatário
-             "From: %s\r\n"                // Remetente
-             "Subject: Sistema de Cadastro e Login\r\n"  // Assunto
-             "\r\n"                       // Linha em branco separando cabeçalho do corpo
-             "%s",// Corpo
+             "To: %s\r\n"                               // Destinatário
+             "From: %s\r\n"                             // Remetente
+             "Subject: Sistema de Cadastro e Login\r\n" // Assunto
+             "\r\n"                                     // Linha em branco separando cabeçalho do corpo
+             "%s",                                      // Corpo
              dados->email, remetente, mensagem_email);
 
     // Inicializa struct com dados da mensagem para envio via callback
