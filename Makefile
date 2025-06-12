@@ -12,7 +12,7 @@ CFLAGS = -Wall -O2 -Iinclude
 # Diretórios onde estão os arquivos .c
 SRC_DIRS = src \
            funcoes_gerais/binarias \
-           funcoes_gerais/front_terminal \
+           funcoes_gerais/ADK \
            funcoes_gerais/funcoes_adm \
            funcoes_gerais/principais \
            funcoes_gerais/secundarias

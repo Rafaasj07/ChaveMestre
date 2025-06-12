@@ -1,28 +1,7 @@
-#include <stdio.h>      // Biblioteca padrão para entrada e saída
-#include <string.h>     // Biblioteca para manipulação de strings e memória
+#include <stdio.h>  
+#include <string.h>     
 #include "C:/msys64/mingw64/include/curl/curl.h"  // Biblioteca libcurl para transferências via URL, usada aqui para SMTP
-#include "prototipos.h" // Arquivo local com protótipos de funções (suposição)
-
-/* 
-Este trecho pode causar erro de IntelliSense no VSCode.
-Passo a passo para corrigir:
-
-1. Pressione Ctrl + Shift + P no VSCode.
-2. Procure por: C/C++: Edit Configurations (UI)
-3. No arquivo c_cpp_properties.json, add no campo "includePath", as duas linhas:
-
-   "includePath": [
-        "C:/msys64/mingw64/include",
-        "C:/msys64/mingw64/include/curl"
-   ],
-
-4. Certifique-se de que o caminho acima corresponde à sua instalação do MSYS2.
-   Se for diferente, descubra o caminho correto com o comando:
-
-       which gcc
-
-   Ele mostrará o caminho do compilador gcc em uso — use essa base para ajustar os caminhos do include.
-*/
+#include "prototipos.h" 
 
 // Struct para manter os dados do e-mail em memória durante o envio
 struct upload_data

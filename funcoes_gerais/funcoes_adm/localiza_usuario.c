@@ -3,74 +3,83 @@
 #include <string.h>
 #include "prototipos.h"
 
-// Função para localizar um usuário específico pelo nome.
+// Função para localizar um usuário pelo nome no sistema.
 void localiza_usuario(Cadastro *dados) {
     Cadastro usuario_buscado;
-    usuario_buscado.menu_principal = '1'; // Configura para buscar no arquivo de usuários.
+    usuario_buscado.menu_principal = '1';  // Define que a busca será feita entre usuários comuns.
 
     int nome_existe;
-    // Loop para garantir que o admin possa tentar nomes diferentes caso o primeiro não seja encontrado.
+
+    // Loop para permitir múltiplas tentativas de busca pelo nome do usuário.
     do {
         char usuario_procurado[37];
 
-        // Desenha a interface de localização.
-        limpar();
-        bordas();
+        // Monta a interface visual da tela de localização.
+        limpar();    // Limpa o console.
+        bordas();    // Desenha bordas na tela.
         ir_para(25, 2);
+        // Linha superior da caixa.
         printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", 218, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 191);
         ir_para(25, 3);
         printf("%c   \033[1;35mSISTEMA DE CADASTRO E LOGIN\033[0m   %c", 179, 179);
         ir_para(25, 4);
         printf("%c        Localizar Usuario        %c", 179, 179);
         ir_para(25, 5);
-        printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", 192, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 217);
+        // Linha inferior da caixa.
+        printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c",192, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 217);
         
-        // Pede o nome do usuário a ser localizado.
+        // Solicita ao administrador o nome do usuário que deseja localizar.
         ir_para(25, 10);
-        printf("Nome do Usuario: ");
+        escreva("Nome do Usuario: ", PINK);
         fgets(usuario_procurado, sizeof(usuario_procurado), stdin);
-        usuario_procurado[strcspn(usuario_procurado, "\n")] = '\0';
+        usuario_procurado[strcspn(usuario_procurado, "\n")] = '\0';  // Remove o '\n' da string.
 
-        // Usa a função verificar_nome para encontrar o usuário.
-        // Se encontrado, os dados são carregados na struct 'usuario_buscado'.
+        // Verifica se o nome digitado existe e carrega os dados na struct usuario_buscado.
         nome_existe = verificar_nome(&usuario_buscado, usuario_procurado);
 
-        if (nome_existe == 1) { // Se o usuário foi encontrado.
+        if (nome_existe == 1) {  // Se o usuário foi encontrado
             ir_para(25, 9);
-            printf("Usuario : %s", usuario_buscado.nome);
+            escreva("Usuario : ", PINK);
+            printf("%s", usuario_buscado.nome);  // Mostra o nome do usuário encontrado.
             ir_para(25, 10);
-            limpar_linha();
+            limpar_linha();  // Limpa a linha para exibir o CPF.
             ir_para(25, 10);
-            printf("CPF: %s", usuario_buscado.cpf);
+            escreva("CPF: ", PINK);
+            printf("%s", usuario_buscado.cpf);   // Mostra o CPF do usuário.
             ir_para(25, 11);
-            printf("Email: %s", usuario_buscado.email);
+            escreva("Email: ", PINK);
+            printf("%s", usuario_buscado.email); // Mostra o email do usuário.
 
             ir_para(4, 23);
-            printf("Usuario localizado. Encerrando o programa...");
-            exit(0); // Finaliza o programa após encontrar.
-        } else { // Se o usuário não foi encontrado.
+            escreva("Usuario localizado. Encerrando o programa...", BLUE);
+            exit(0);  // Encerra o programa após localizar o usuário.
+        } else {  // Caso o usuário não seja encontrado
             char deseja_repetir_nome;
             do {
+                reset(10);
                 ir_para(30, 12);
-                printf("\033[1;31mUsuario nao encontrado\033[0m");
+                escreva("Usuario nao encontrado", RED);
                 ir_para(26, 14);
-                printf("Deseja repetir o nome do Usuario?");
+                escreva("Deseja repetir o nome do Usuario?", BLUE);
                 ir_para(30, 15);
-                printf("[1] SIM  ou  [2] NAO  : ");
+                escreva("[1] ", GREEN); printf("SIM ou ");
+                escreva("[2] ", RED); printf("NAO  : ");
                 scanf("%c", &deseja_repetir_nome);
-                apaga_buffer();
+                apaga_buffer();  // Limpa buffer para evitar problemas no input.
+
                 switch (deseja_repetir_nome) {
                 case '1':
-                    limpar(); // Limpa a tela para uma nova tentativa.
+                    limpar();  // Limpa a tela para nova tentativa de busca.
                     break;
                 case '2':
                     ir_para(24, 17);
-                    printf("\033[1;31mSaindo do programa...\033[0m");
-                    exit(0); // Sai do programa.
+                    escreva("Saindo do programa...", BLUE);
+                    exit(0);  // Sai do programa caso escolha não tentar novamente.
                 default:
+                    reset(15);
                     break;
                 }
             } while (deseja_repetir_nome != '1' && deseja_repetir_nome != '2');
         }
-    } while (nome_existe == 0); // O loop principal continua se o usuário não foi encontrado e o adm quis tentar de novo.
+    } while (nome_existe == 0);  // Continua perguntando até encontrar ou o usuário desistir.
 }

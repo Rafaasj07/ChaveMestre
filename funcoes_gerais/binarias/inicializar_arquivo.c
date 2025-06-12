@@ -21,7 +21,7 @@ void inicializar_arquivo(char menu_principal) {
     if (arquivo == NULL) {
         // Se mesmo assim houver um erro (ex: falta de permissão de escrita), o programa é encerrado.
         ir_para(20, 16);
-        printf("\033[1;31mNao foi possivel abrir ou criar o arquivo.\033[0m");
+        escreva("Nao foi possivel abrir ou criar o arquivo.", RED);
         exit(1);
     }
     fclose(arquivo); // Fecha o arquivo imediatamente.

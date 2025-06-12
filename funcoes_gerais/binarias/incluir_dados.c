@@ -4,7 +4,9 @@
 
 // Função para incluir (gravar) os dados de uma struct 'Cadastro' em um arquivo binário.
 void incluir_dados(Cadastro *dados) {
-    // Determina o nome do arquivo com base na escolha do menu (usuário ou adm).
+    // Define o nome do arquivo dependendo do tipo de cadastro (usuário ou administrador).
+    // Se 'menu_principal' for '1', grava no arquivo de usuários.
+    // Se for '2', grava no arquivo de administradores.
     const char *nome_arquivo = NULL;
     if (dados->menu_principal == '1') {
         nome_arquivo = "usuarios_cadastrados.bin";
@@ -12,20 +14,22 @@ void incluir_dados(Cadastro *dados) {
         nome_arquivo = "adms_cadastrados.bin";
     }
 
-    // Abre o arquivo em modo "ab": append (adicionar) em modo binário.
-    // Este modo abre o arquivo para escrita no final. Se o arquivo não existir, ele é criado.
+    // Abre o arquivo em modo append binário ("ab").
+    // Isso faz com que os dados sejam adicionados ao final do arquivo,
+    // sem apagar o conteúdo existente. Caso o arquivo não exista, ele é criado.
     FILE *arquivo = fopen(nome_arquivo, "ab");
+    
+    // Verifica se o arquivo foi aberto com sucesso.
     if (arquivo == NULL) {
         ir_para(20, 16);
-        printf("\033[1;31mNao foi possivel abrir ou criar o arquivo.\033[0m");
-        exit(1); // Encerra o programa se houver falha.
+        escreva("Nao foi possivel abrir ou criar o arquivo.", RED);
+        exit(1); // Encerra o programa com código de erro 1.
     }
-
-    // A função fwrite() escreve o bloco de dados da struct 'dados' no arquivo.
-    // 1º arg: Ponteiro para os dados a serem escritos.
-    // 2º arg: Tamanho de cada item a ser escrito.
-    // 3º arg: Quantidade de itens a serem escritos.
-    // 4º arg: Ponteiro para o arquivo.
+    
+    // Escreve no arquivo o conteúdo da struct 'dados'.
+    // fwrite grava 1 elemento do tamanho da struct Cadastro.
     fwrite(dados, sizeof(Cadastro), 1, arquivo);
-    fclose(arquivo); // Fecha o arquivo para garantir que os dados sejam salvos.
+    
+    // Fecha o arquivo para garantir que os dados sejam salvos corretamente.
+    fclose(arquivo);
 }
