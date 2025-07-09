@@ -1,4 +1,4 @@
-# ChaveMestre: Sistema de Gerenciamento de Usuários em C
+# Sistema de Gerenciamento de Usuários em C
 
 `ChaveMestre` é um sistema robusto de cadastro e login de usuários e administradores, desenvolvido inteiramente em C. O projeto foi construído com foco em segurança, modularidade e uma interface de terminal limpa e interativa. Ele serve como uma solução completa para gerenciamento de perfis, com funcionalidades distintas para usuários padrão e administradores do sistema.
 
